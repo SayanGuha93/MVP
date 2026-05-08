@@ -52,7 +52,7 @@ const METRIC_DOCS = [
   {
     key: "cycle_time",
     icon: "🔄",
-    color: { accent: "#1D9E75", light: "#E1F5EE", text: "#085041" },
+    color: { accent: "#378ADD", light: "#E6F1FB", text: "#0C447C" },
     title: "Cycle Time",
     tagline: "How fast does work move once started?",
     what: "The time between when a developer actively starts working on a task (moves it to 'In Progress') and when it is marked Done. Unlike lead time, it excludes queue/wait time before work begins.",
@@ -67,7 +67,7 @@ const METRIC_DOCS = [
   {
     key: "deployments",
     icon: "🚀",
-    color: { accent: "#7F77DD", light: "#EEEDFE", text: "#3C3489" },
+    color: { accent: "#1D9E75", light: "#E1F5EE", text: "#085041" },
     title: "Deployment Frequency",
     tagline: "How often does code ship to production?",
     what: "Counts the number of successful deployments to production in a given month. Each deployment is a discrete release of code.",
@@ -82,7 +82,7 @@ const METRIC_DOCS = [
   {
     key: "pr_throughput",
     icon: "⇄",
-    color: { accent: "#BA7517", light: "#FAEEDA", text: "#633806" },
+    color: { accent: "#378ADD", light: "#E6F1FB", text: "#0C447C" },
     title: "PR Throughput",
     tagline: "How many pull requests are shipped per month?",
     what: "The count of pull requests merged to the main/production branch in a given month. Includes all PRs regardless of size.",
@@ -94,21 +94,25 @@ const METRIC_DOCS = [
       "Review and merge others' PRs promptly to maintain team flow.",
     ],
   },
-  {
-    key: "bug_rate",
-    icon: "⚠",
-    color: { accent: "#D85A30", light: "#FAECE7", text: "#712B13" },
-    title: "Bug Rate",
-    tagline: "How often do bugs escape to production?",
-    what: "The percentage of work that results in bugs discovered after deployment (escaped bugs). Calculated as escaped bug count divided by total deployments, expressed as a percentage.",
-    why: "Escaped bugs are costly — they damage user trust, consume on-call time, and require emergency fixes. A low bug rate signals strong code quality practices.",
-    good: "Under 5% is excellent. 5–15% is acceptable. Above 15% warrants a review of testing strategy and code review thoroughness.",
-    tips: [
-      "Write unit and integration tests before or alongside new code.",
-      "Use staging environments that closely mirror production.",
-      "Track which types of changes generate the most bugs and add targeted coverage.",
-    ],
+{
+  key: "bug_rate",
+  icon: "⚠",
+  color: {
+    accent: "#DC2626",
+    light: "#DC2626",
+    text: "#991B1B",
   },
+  title: "Bug Rate",
+  tagline: "How often do bugs escape to production?",
+  what: "The percentage of work that results in bugs discovered after deployment (escaped bugs). Calculated as escaped bug count divided by total deployments, expressed as a percentage.",
+  why: "Escaped bugs are costly — they damage user trust, consume on-call time, and require emergency fixes. A low bug rate signals strong code quality practices.",
+  good: "Under 5% is excellent. 5–15% is acceptable. Above 15% warrants a review of testing strategy and code review thoroughness.",
+  tips: [
+    "Write unit and integration tests before or alongside new code.",
+    "Use staging environments that closely mirror production.",
+    "Track which types of changes generate the most bugs and add targeted coverage.",
+  ],
+},
 ];
 
 function MetricGuideCard({ metric }) {
@@ -374,54 +378,54 @@ function DeveloperProfile() {
           <span style={{ fontSize: "18px", color: "#7F77DD", opacity: 0.6, flexShrink: 0 }}>›</span>
         </div>
 
-        {/* Performance Insights */}
-        <div style={{
-          background: "var(--color-background-primary)",
-          border: "0.5px solid var(--color-border-tertiary)",
-          borderRadius: "var(--border-radius-lg)",
-          padding: "1.25rem",
-        }}>
-          <div style={{ marginBottom: "1.25rem", borderBottom: "0.5px solid var(--color-border-tertiary)", paddingBottom: "1rem" }}>
-            <h2 style={{ fontSize: "14px", fontWeight: 700, color: "var(--color-text-primary)", margin: 0 }}>
-              Performance Insights
-            </h2>
-            <p style={{ fontSize: "11px", color: "var(--color-text-secondary)", marginTop: "3px", marginBottom: 0 }}>
-              Select a month to view metric breakdown
-            </p>
-          </div>
-          <InsightPanel
-            developer_id={developer_id}
-            leadTime={leadTime}
-            cycleTime={cycleTime}
-            deployFreq={deployFreq}
-            prThroughput={prThroughput}
-            bugRate={bugRate}
-            selectedMonth={selectedMonth}
-            onMonthChange={setSelectedMonth}
-          />
+      {/* Performance Insights */}
+      <div style={{
+        background: "var(--color-background-primary)",
+        border: "0.5px solid var(--color-border-tertiary)",
+        borderRadius: "var(--border-radius-lg)",
+        padding: "1.25rem",
+      }}>
+        <div style={{ marginBottom: "1.25rem", borderBottom: "0.5px solid var(--color-border-tertiary)", paddingBottom: "1rem" }}>
+          <h2 style={{ fontSize: "14px", fontWeight: 700, color: "var(--color-text-primary)", margin: 0 }}>
+            Performance Insights
+          </h2>
+          <p style={{ fontSize: "11px", color: "var(--color-text-secondary)", marginTop: "3px", marginBottom: 0 }}>
+            Select a month to view metric breakdown
+          </p>
         </div>
+        <InsightPanel
+          developer_id={developer_id}
+          leadTime={leadTime}
+          cycleTime={cycleTime}
+          deployFreq={deployFreq}
+          prThroughput={prThroughput}
+          bugRate={bugRate}
+          selectedMonth={selectedMonth}
+          onMonthChange={setSelectedMonth}
+        />
+      </div>
 
-        {/* Metrics Guide */}
-        <div style={{
-          background: "var(--color-background-primary)",
-          border: "0.5px solid var(--color-border-tertiary)",
-          borderRadius: "var(--border-radius-lg)",
-          padding: "1.25rem",
-        }}>
-          <div style={{ marginBottom: "1rem", borderBottom: "0.5px solid var(--color-border-tertiary)", paddingBottom: "1rem" }}>
-            <h2 style={{ fontSize: "14px", fontWeight: 700, color: "var(--color-text-primary)", margin: 0 }}>
-              Metrics Guide
-            </h2>
-            <p style={{ fontSize: "11px", color: "var(--color-text-secondary)", marginTop: "3px", marginBottom: 0 }}>
-              What each metric means, why it matters, and how to improve it — click any metric to expand
-            </p>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-            {METRIC_DOCS.map((m) => (
-              <MetricGuideCard key={m.key} metric={m} />
-            ))}
-          </div>
+      {/* Metrics Guide */}
+      <div style={{
+        background: "var(--color-background-primary)",
+        border: "0.5px solid var(--color-border-tertiary)",
+        borderRadius: "var(--border-radius-lg)",
+        padding: "1.25rem",
+      }}>
+        <div style={{ marginBottom: "1rem", borderBottom: "0.5px solid var(--color-border-tertiary)", paddingBottom: "1rem" }}>
+          <h2 style={{ fontSize: "14px", fontWeight: 700, color: "var(--color-text-primary)", margin: 0 }}>
+            Metrics Guide
+          </h2>
+          <p style={{ fontSize: "11px", color: "var(--color-text-secondary)", marginTop: "3px", marginBottom: 0 }}>
+            What each metric means, why it matters, and how to improve it — click any metric to expand
+          </p>
         </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+          {METRIC_DOCS.map((m) => (
+            <MetricGuideCard key={m.key} metric={m} />
+          ))}
+        </div>
+      </div>
 
       </div>
     </div>
